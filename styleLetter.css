@@ -1,0 +1,225 @@
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#ffffff, #f9d6d6);
+    font-family: "Steph", sans-serif;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.envelope-wrapper {
+    position: relative;
+    cursor: pointer;
+    z-index: 0;
+    width: 320px;
+    height: 200px;
+    perspective: 1000px;
+}
+
+.envelope {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    animation: float 2s ease-in-out infinite;
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.envelope-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffb6c1;
+    border-radius: 15px;
+    box-shadow: 
+        0 10px 20px rgba(0,0,0,0.1),
+        0 6px 6px rgba(0,0,0,0.1);
+}
+
+/* Side flaps */
+.envelope::before,
+.envelope::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #ffc7cd;
+    z-index: 1;
+}
+
+.envelope::before {
+    left: 0;
+    transform-origin: left;
+    clip-path: polygon(0 0, 100% 0, 50% 100%, 0 100%);
+}
+
+.envelope::after {
+    right: 0;
+    transform-origin: right;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.envelope-flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #ff99a3;
+    clip-path: polygon(0 0, 50% 50%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.4s ease;
+    z-index: 2;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope-heart {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    font-size: 2rem;
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.envelope.open .envelope-heart {
+    opacity: 0;
+}
+
+/* Small white dots */
+.envelope-dots {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    top: 50%;
+    left: 10%;
+    box-shadow: 
+        calc(80% * 1) 0 0 rgba(255, 255, 255, 0.8);
+    z-index: 3;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(0,0,0,0.2),
+        0 0 100px rgba(255,182,193,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.letter-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.letter-content h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+@media (max-width: 1150px) {
+    .envelope-wrapper {
+        width: 280px;
+        height: 175px;
+    }
+    
+    .modal {
+        width: 80%;
+    }
+}
+
+@media (max-width: 600px) {
+    .envelope-wrapper {
+        width: 240px;
+        height: 150px;
+    }
+    
+    .modal {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .letter-content {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .envelope-heart {
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+}

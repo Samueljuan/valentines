@@ -1,0 +1,62 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(#ffffff, #f9d6d6);
+    font-family: "Steph", sans-serif;
+}
+
+.container {
+    max-width: 100%;
+    margin: 20px auto 0 auto;
+}
+
+#togepi-gif {
+    max-width: 500px; /* Batasi lebar maksimum */
+    max-height: 450px; /* Batasi tinggi maksimum */
+    width: auto; /* Ikuti rasio asli */
+    height: auto; /* Ikuti rasio asli */
+    display: block;
+    object-fit: contain; /* Pastikan gambar tidak terpotong */
+    margin: 0 auto; /* Pusatkan gambar secara horizontal */
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 50px auto;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 75px;
+}
+
+button {
+    border-radius: 8px;
+    min-width: 100px;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+#yes-btn {
+    background-color: #57915e;
+    color: white;
+}
+
+#no-btn {
+    background-color: #db4e4e;
+    color: white;
+}
